@@ -3,12 +3,22 @@ const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
+// Add CORS middleware with specific configuration
+app.use(cors({
+  origin: 'http://localhost:3000', // Allow the frontend origin
+  methods: 'GET,POST,PUT,DELETE',
+  allowedHeaders: 'Content-Type,Authorization', // Allow required headers
+  credentials: true, // Allow cookies/auth headers
+}));
+
+app.use(express.json());
 // MongoDB connection
 mongoose.connect('mongodb+srv://tharunamireddy07:AkpdevB9cN2KZO53@cluster0.mqukg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
