@@ -67,23 +67,6 @@ app.post('/submit', upload.array('images', 10), async (req, res) => {
   res.json({ message: 'Submission successful!' });
 });
 
-
-const addAdmin = async () => {
-  const username = 'Admin';
-  const password = 'Admin@123';
-
-  // Hash the password
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  // Insert into the database
-  const admin = new Admin({ username, password: hashedPassword });
-  await admin.save();
-
-  console.log('Admin added successfully!');
-  process.exit(); // Exit the script
-};
-
-addAdmin();
 // Admin authentication
 app.post('/admin/login', async (req, res) => {
   const { username, password } = req.body;
